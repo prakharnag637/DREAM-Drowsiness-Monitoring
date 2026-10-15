@@ -13,6 +13,20 @@ from .vision import VisionEngine
 load_dotenv()
 Base.metadata.create_all(bind=engine)
 app = FastAPI(title="DREAM Research Prototype API", version="0.2.0")
+
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://dream-drowsiness-monitoring.vercel.app",
+        "http://localhost:5173",
+    ],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 origins = [x.strip() for x in os.getenv("CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173").split(",") if x.strip()]
 app.add_middleware(CORSMiddleware, allow_origins=origins, allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 engine_cv = VisionEngine(
