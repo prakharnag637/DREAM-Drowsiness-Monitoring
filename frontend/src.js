@@ -1,4 +1,6 @@
-const API = "http://127.0.0.1:8000";
+
+const API = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
+
 import "./style.css";
 document.querySelector("#app").innerHTML = `
 <div class="shell"><aside class="sidebar"><div class="brand"><div class="mark">D</div><div><b>DREAM</b><small>RESEARCH PROTOTYPE</small></div></div>
